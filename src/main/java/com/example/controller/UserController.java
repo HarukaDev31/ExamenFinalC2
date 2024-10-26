@@ -20,7 +20,7 @@ public class UserController {
         return userRepository.findAll();
     }
     @GetMapping("/users/{id}")
-    public User getUserById(Long id){
+    public User getUserById(@PathVariable Long id){
         return userRepository.findById(id).orElse(null);
     }
     @PostMapping("/users")
@@ -31,7 +31,7 @@ public class UserController {
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         User userToUpdate = userRepository.findById(id).orElse(null);
         if (userToUpdate != null) {
-            userToUpdate.setName(user.getName());
+            userToUpdate.setFirstname(user.getFirstname());
             userToUpdate.setEmail(user.getEmail());
             return userRepository.save(userToUpdate);
         }
