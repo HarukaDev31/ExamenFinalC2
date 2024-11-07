@@ -31,7 +31,6 @@ public class UserController {
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         User userToUpdate = userRepository.findById(id).orElse(null);
         if (userToUpdate != null) {
-            userToUpdate.setFirstname(user.getFirstname());
             userToUpdate.setEmail(user.getEmail());
             return userRepository.save(userToUpdate);
         }

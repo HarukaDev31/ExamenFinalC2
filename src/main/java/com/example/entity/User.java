@@ -19,30 +19,20 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String firstname;
-    private String lastname;
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private int roleId;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
-        // Añadir permisos
-        authorities.addAll(
-                role.getPermissions()
-                        .stream()
-                        .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                        .collect(Collectors.toSet())
-        );
 
-        // Añadir rol
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
 
         return authorities;  }
 
@@ -78,5 +68,11 @@ public class User implements UserDetails {
 
     public Object orElseThrow() {
         return null;
+    }
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+    public int getRoleId() {
+        return roleId;
     }
 }
