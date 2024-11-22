@@ -7,10 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import com.example.exceptions.User.UserNotFoundException;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -25,15 +25,20 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
+     try{
+         String username = authentication.getName();
+         String password = authentication.getCredentials().toString();
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        if (userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())) {
-            throw new UsernameNotFoundException("Invalid username or password");
-        }
+         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+         if (userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())) {
+             throw new UserNotFoundException("Invalid username or password");
+         }
 
-        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+     }catch (Exception e){
+         throw new UserNotFoundException("Invalid username or password");
+     }
+
     }
 
     @Override
