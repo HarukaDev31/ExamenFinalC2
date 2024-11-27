@@ -16,8 +16,13 @@ public class EmployeeController {
     public EmployeeController(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
+
     @GetMapping("/employees")
-    public List<Employee> getEmployees() {
-        return employeeRepository.findAll();
+    //function to get employees and filter by search value in route and filter by name lastname concat or email
+    public List<Employee> getEmployees(String search) {
+        if (search == null) {
+            return employeeRepository.findAll();
+        }
+        return employeeRepository.findBySearch(search);
     }
 }

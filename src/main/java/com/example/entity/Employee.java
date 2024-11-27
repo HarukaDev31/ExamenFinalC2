@@ -1,9 +1,8 @@
 package com.example.entity;
 
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "employees")
+//add one to one relationship with user
+
 public class Employee {
     @Id
     private Long id;
@@ -29,7 +30,13 @@ public class Employee {
     private String documentNumber;
     private int documentTypeId;
     private String createdAt;
-    private int userId;
+    @JsonIgnoreProperties("employee")
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
+
+
 
 
 

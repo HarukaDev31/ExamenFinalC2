@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import com.example.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +28,9 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private int roleId;
-
+    @JsonIgnoreProperties("user")
+    @OneToOne(mappedBy = "user")
+    private Employee employee;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
