@@ -1,4 +1,5 @@
-CREATE TABLE document_types (
+
+/*CREATE TABLE document_types (
                                 id INT PRIMARY KEY IDENTITY,
                                 name VARCHAR(255) NOT NULL,
                                 created_at DATETIME DEFAULT GETDATE()
@@ -128,3 +129,80 @@ CREATE TABLE bank_accounts (
                                FOREIGN KEY (employee_id) REFERENCES employees(id)
 );
 GO
+  INSERT INTO positions (name, area_id)
+VALUES
+    -- Human Resources
+    ('Recruiter', 1),
+    ('HR Generalist', 1),
+    ('Training Specialist', 1),
+
+    -- Finance
+    ('Financial Analyst', 2),
+    ('Accountant', 2),
+    ('Auditor', 2),
+
+    -- Marketing
+    ('Marketing Manager', 3),
+    ('SEO Specialist', 3),
+    ('Brand Strategist', 3),
+
+    -- Sales
+    ('Sales Executive', 4),
+    ('Account Manager', 4),
+    ('Business Development Manager', 4),
+
+    -- Operations
+    ('Operations Manager', 5),
+    ('Logistics Coordinator', 5),
+    ('Quality Assurance Specialist', 5),
+
+    -- Customer Service
+    ('Customer Support Representative', 6),
+    ('Call Center Supervisor', 6),
+    ('Customer Success Manager', 6),
+
+    -- Research and Development
+    ('R&D Scientist', 7),
+    ('Product Developer', 7),
+    ('Research Analyst', 7),
+
+    -- IT/Technology
+    ('Software Engineer', 8),
+    ('Software Engineer Mid',8),
+    ('Software Engineer Senior',8),
+    ('Tech Lead',8)
+    ('System Administrator', 8),
+    ('Cybersecurity Specialist', 8),
+
+    -- Legal
+    ('Legal Advisor', 9),
+    ('Compliance Officer', 9),
+    ('Paralegal', 9),
+
+    -- Supply Chain
+    ('Supply Chain Manager', 10),
+    ('Inventory Analyst', 10),
+    ('Procurement Specialist', 10);
+
+   select * from salaries s ;
+  select * from employees e;
+ select * from positions p ;
+select * from settings s ;
+select
+        s1_0.id,
+        s1_0.created_at,
+        s1_0.key,
+        s1_0.name,
+        s1_0.updated_at,
+        s1_0.value
+    from
+        settings s1_0
+
+
+        INSERT INTO fundamentos2.dbo.settings
+(name, value, created_at, updated_at, key_val)
+VALUES('UIT', 5140, getdate(), null, 'uit'),
+('AFP',0.10,getdate(),null,'afp'),
+('ONP',0.12,getdate(),null,'onp'),
+('SEGURO',0.9,getdate(),null,'seguro')}
+ */
